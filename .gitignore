@@ -1,4 +1,4 @@
 venv/
 output.txt
 news.csv
-
+*__pycache__/
