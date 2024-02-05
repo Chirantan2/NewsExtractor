@@ -2,3 +2,4 @@ venv/
 output.txt
 news.csv
 *__pycache__/
+newsextractor.log
