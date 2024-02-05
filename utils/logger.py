@@ -1,7 +1,7 @@
 import logging
 
 # Configuring basic logging settings like filename, log format, etc.
-logging.basicConfig(filename='logger.log',format="%(asctime)s - %(levelname)s - %(message)s",level=logging.INFO)
+logging.basicConfig(filename='newsextractor.log',format="%(asctime)s - %(levelname)s - %(message)s",level=logging.INFO)
 
 
 def log_message(message: str, level: int):
