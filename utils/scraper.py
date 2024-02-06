@@ -2,7 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 from utils import logger
 
-def espn(url:str) -> dict:
+
+def espn(url:str) -> any:
     """scrapes data from espn site
 
     Args:
@@ -11,7 +12,7 @@ def espn(url:str) -> dict:
     Returns:
         dict: dict{headline, body}
     """
-    # user-agent required to avoid server error
+    # user-agent required to avoid server error (mod_security)
     try:
         response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'})
         soup = BeautifulSoup(response.text, 'lxml')
@@ -22,17 +23,14 @@ def espn(url:str) -> dict:
         headline_text = ' '.join([h.text for h in headings])
         body_text = ' '.join([p.text for p in paras])
 
+        # store_results.store_result(headline_text=headline_text, body_text=body_text, url=url)
+        # return {'Headline': headline_text, 'Content': body_text, 'Link': url}
+        return headline_text, body_text, url
         
-        with open('output.txt', 'a', encoding='utf-8') as op:
-            op.write("=============================================================\n")
-            op.write(f'Headline: {headline_text}\n')
-            op.write(f'Body: {body_text}\n')
-            op.write(f'Link: {url}\n')
-            
-            op.write('\n')
     except Exception as e:
         logger.log_message(f'Error: {e}', level=1)
-def thedrive(url:str) -> dict:
+
+def thedrive(url:str) -> any:
     """scrapes data from thedrive site
 
     Args:
@@ -52,11 +50,10 @@ def thedrive(url:str) -> dict:
         headline_text = '\n'.join([h.text for h in headings])
         body_text = ' '.join([p.text for p in paras])
 
-        with open('output.txt', 'a', encoding='utf-8') as op:
-            op.write("=============================================================\n")
-            op.write(f'Headline: {headline_text}\n')
-            op.write(f'Body: {body_text}\n')
-            op.write(f'Link: {url}\n')
-            op.write('\n')
+        # store_results.store_result(headline_text=headline_text, body_text=body_text, url=url)
+        # {'Headline': headline_text, 'Content': body_text, 'Link': url}
+        # return {'Headline': headline_text,'Content': body_text,'Link': url}
+        return headline_text, body_text, url
+
     except Exception as e:
         logger.log_message(f'Error: {e}', level=1)

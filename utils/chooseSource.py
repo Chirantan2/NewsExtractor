@@ -1,4 +1,7 @@
 from utils.scraper import thedrive, espn
+# import ast
+
+
 def source_select(url):
     """Separates the domain name from the url and calls the domain specific function or else raises an error if the function doesn't exist
 
@@ -15,8 +18,10 @@ def source_select(url):
     domain = url.split('/')[2] if '://' in url else url.split('/')[0] 
     function_name = f"{domain.split('.')[1]}"
 
+    function_call = f"{function_name}('{url}')"
+
     try:
         # call function dynamically
-        return eval(f"{function_name}('{url}')")
+        return eval(function_call)
     except NameError as e:
         raise ValueError(f"Error: {e}")
